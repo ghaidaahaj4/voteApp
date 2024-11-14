@@ -2,7 +2,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFish } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-export default function CandidateCard({ voted, handle, middle, handleMiddle }) {
+export default function CandidateCard({
+  index,
+  voted,
+  handle,
+  middle,
+  handleMiddle,
+  handleCurrent,
+  currentVote,
+}) {
   const [buttonStatus, setStatus] = useState(0);
 
   function handleClick() {
@@ -21,6 +29,7 @@ export default function CandidateCard({ voted, handle, middle, handleMiddle }) {
     if (buttonStatus === 1) {
       handle(true);
     }
+    handleCurrent(index);
   }
 
   return (
@@ -31,7 +40,9 @@ export default function CandidateCard({ voted, handle, middle, handleMiddle }) {
       {!middle && <button onClick={handleClick}>Vote</button>}
       {middle && !voted && <button onClick={handleClick}>Are You Sure</button>}
       {voted && <button>Done</button>}
-      {buttonStatus === 1 && <p>HERE</p>}
+      {buttonStatus === 1 && !voted && index === currentVote && (
+        <p>HERE{index}</p>
+      )}
     </div>
   );
 }
