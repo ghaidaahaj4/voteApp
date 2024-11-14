@@ -3,16 +3,13 @@ import CandidateCard from "./CandidateCard";
 import { useState } from "react";
 
 export default function VotingPage() {
-  const [middleVote, setMiddleVote] = useState(false);
   const [voted, setIsVoted] = useState(false);
   const [currentVote, setCurrentVote] = useState(0);
 
   function handleVoteFinalClick() {
     setIsVoted(true);
   }
-  function handleMiddle() {
-    setMiddleVote(true);
-  }
+
   function handleCurrent(index) {
     setCurrentVote(index);
   }
@@ -25,8 +22,6 @@ export default function VotingPage() {
           index={1}
           voted={voted}
           handle={handleVoteFinalClick}
-          middle={middleVote}
-          handleMiddle={handleMiddle}
           handleCurrent={handleCurrent}
           currentVote={currentVote}
         />
@@ -34,8 +29,6 @@ export default function VotingPage() {
           index={2}
           voted={voted}
           handle={handleVoteFinalClick}
-          middle={middleVote}
-          handleMiddle={handleMiddle}
           handleCurrent={handleCurrent}
           currentVote={currentVote}
         />
@@ -43,8 +36,6 @@ export default function VotingPage() {
           index={3}
           voted={voted}
           handle={handleVoteFinalClick}
-          middle={middleVote}
-          handleMiddle={handleMiddle}
           handleCurrent={handleCurrent}
           currentVote={currentVote}
         />
@@ -52,8 +43,6 @@ export default function VotingPage() {
           index={4}
           voted={voted}
           handle={handleVoteFinalClick}
-          middle={middleVote}
-          handleMiddle={handleMiddle}
           handleCurrent={handleCurrent}
           currentVote={currentVote}
         />

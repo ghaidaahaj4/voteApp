@@ -6,26 +6,12 @@ export default function CandidateCard({
   index,
   voted,
   handle,
-  middle,
-  handleMiddle,
   handleCurrent,
   currentVote,
 }) {
   const [buttonStatus, setStatus] = useState(0);
 
   function handleClick(final) {
-    setStatus((prev) => {
-      if (prev === 0) {
-        return 1;
-      }
-      if (prev === 1) {
-        return 2;
-      }
-    });
-
-    if (buttonStatus === 0) {
-      handleMiddle(true);
-    }
     if (final === "FINAL") {
       handle(true);
     }
@@ -37,11 +23,13 @@ export default function CandidateCard({
       <FontAwesomeIcon icon={faFish} />
       <h1>NAME</h1>
 
-      {!middle && <button onClick={handleClick}>Vote</button>}
-      {middle && !voted && <button onClick={handleClick}>Are You Sure</button>}
+      {index !== currentVote && !voted && (
+        <button onClick={handleClick}>vote</button>
+      )}
       {voted && <button>Done</button>}
-      {index === currentVote && <p>HERE{index}</p>}
-      {index === currentVote && (
+      {index === currentVote && !voted && <p>Are You Sure ?</p>}
+      {index === currentVote && voted && <p>your vote</p>}
+      {index === currentVote && !voted && (
         <button
           onClick={() => {
             handleClick("FINAL");
