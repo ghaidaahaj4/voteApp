@@ -9,8 +9,6 @@ export default function CandidateCard({
   handleCurrent,
   currentVote,
 }) {
-  const [buttonStatus, setStatus] = useState(0);
-
   function handleClick(final) {
     if (final === "FINAL") {
       handle(true);
