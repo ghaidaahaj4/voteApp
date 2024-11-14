@@ -15,9 +15,7 @@ export default function Login() {
         <input type="password" className="" placeholder="Password" />
       </div>
 
-      <button className="" type="submit">
-        Sign in
-      </button>
+      <button type="submit">Sign in</button>
       <p>© Elections Day 2024</p>
     </form>
   );

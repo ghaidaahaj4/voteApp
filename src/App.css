@@ -25,12 +25,14 @@ form {
   align-items: center;
   justify-content: space-evenly;
   height: 60%;
+
   button {
     width: 30%;
     height: 7%;
+    margin-left: 8%;
     border-radius: 2vh;
-
     background-color: #b3f4ff;
+    text-align: center;
   }
   button:hover {
     background-color: #61dafbc7;
