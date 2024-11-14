@@ -92,3 +92,7 @@ form {
     list-style: none;
   }
 }
+.VotingPage {
+  display: flex;
+  flex-direction: row;
+}
