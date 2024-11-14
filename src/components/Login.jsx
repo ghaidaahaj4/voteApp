@@ -7,8 +7,8 @@ export default function Login() {
       </div>
 
       <div className="inputForom">
-        <label>Full Name</label>
-        <input type="name" className="" placeholder="MyName" />
+        <label>Email </label>
+        <input type="email" className="" placeholder="email@gmail.com" />
       </div>
       <div className="inputForom">
         <label>Password</label>

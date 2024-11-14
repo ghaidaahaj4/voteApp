@@ -6,6 +6,7 @@ html {
   height: 100%;
   overflow: hidden;
   text-align: center;
+  background: linear-gradient(90deg, white, #61dafbaa);
 }
 
 .mainImg {
@@ -51,6 +52,10 @@ form {
       width: 60%;
       height: 50%;
     }
+    label {
+      width: 20%;
+      text-align: center;
+    }
   }
   .foromTitle {
     width: 100%;
@@ -71,7 +76,7 @@ form {
   .explenation {
     width: 50%;
     height: 100%;
-    background: linear-gradient(#61dafbaa, white, #61dafbaa);
+    background: linear-gradient(90deg, #61dafbaa, white);
     padding: 10vh 0;
     display: flex;
     flex-direction: column;
