@@ -1,4 +1,5 @@
 import Login from "./Login";
+
 export default function Main() {
   return (
     <div className="main">
@@ -10,7 +11,7 @@ export default function Main() {
           <li>Cats</li>
           <li>Dogs</li>
           <li>Cows</li>
-          <li>Lions</li>
+          <li>Fishes</li>
         </ul>
       </div>
       <Login />
