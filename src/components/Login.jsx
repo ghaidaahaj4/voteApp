@@ -2,7 +2,11 @@
 import React, { useState } from "react";
 import { doSignInWithEmailAndPassword } from "./Context/AuthContext/auth";
 import { useAuth } from "./Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 export default function Login() {
+  const navigate = useNavigate();
+
   const userLogin = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +23,7 @@ export default function Login() {
         await doSignInWithEmailAndPassword(email, password);
         console.log("Login successful for Email:", email);
         setMessage("Login successful!");
+        navigate("/voting");
       }
     } catch (error) {
       console.error("Login failed:", error);
