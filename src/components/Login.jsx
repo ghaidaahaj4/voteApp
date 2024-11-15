@@ -11,12 +11,20 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    if (!isSignIn) {
-      setIsSignIn(true);
-      await doSignInWithEmailAndPassword(email, password);
+
+    console.log("Attempting to log in with Email:", email);
+    try {
+      if (!isSignIn) {
+        setIsSignIn(true);
+        await doSignInWithEmailAndPassword(email, password);
+        console.log("Login successful for Email:", email);
+        setMessage("Login successful!");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setMessage("Login failed. Please check your credentials.");
     }
+    console.log(message);
   };
 
   return (
