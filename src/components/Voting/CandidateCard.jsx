@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFish } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+
 export default function CandidateCard({
   index,
   voted,
@@ -9,8 +9,6 @@ export default function CandidateCard({
   handleCurrent,
   currentVote,
 }) {
-  const [buttonStatus, setStatus] = useState(0);
-
   function handleClick(final) {
     if (final === "FINAL") {
       handle(true);

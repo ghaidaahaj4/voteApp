@@ -1,13 +1,34 @@
 /* eslint-disable no-undef */
 import CandidateCard from "./CandidateCard";
 import { useState } from "react";
+import { useAuth } from "../Context/AuthContext";
+import { doSignOut } from "../Context/AuthContext/auth";
+import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function VotingPage() {
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  console.log(currentUser.email);
+
   const [voted, setIsVoted] = useState(false);
   const [currentVote, setCurrentVote] = useState(0);
 
-  function handleVoteFinalClick() {
-    setIsVoted(true);
+  async function handleVoteFinalClick() {
+    try {
+      setIsVoted(true);
+      const userVoteRef = doc(db, "votes", currentUser.email);
+      console.log("Saving vote for:", currentUser.email, "Vote:", currentVote);
+      await setDoc(userVoteRef, {
+        voted: true,
+        currentVote,
+        timestamp: new Date(),
+      });
+      console.log("Vote saved successfully!");
+    } catch (error) {
+      console.error("Error saving vote:", error.message);
+    }
   }
 
   function handleCurrent(index) {
@@ -16,7 +37,16 @@ export default function VotingPage() {
 
   return (
     <>
-      <h2>Hello User</h2>
+      <h2>Hello,</h2>
+      <h1> {currentUser.email}</h1>
+      <button
+        onClick={() => {
+          doSignOut();
+          navigate("/");
+        }}
+      >
+        LogOut
+      </button>
       <div className="VotingPage">
         <CandidateCard
           index={1}

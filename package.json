@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.6",
+    "firebase": "^11.0.2",
     "react": "^18.3.1",
+    "react-context-api": "^1.0.2",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"
   },
