@@ -10,33 +10,39 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 export default function VotingPage() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  console.log(currentUser.email);
-
+  const [userRole, setUserRole] = useState("user");
   const [voted, setIsVoted] = useState(false);
   const [currentVote, setCurrentVote] = useState(0);
 
-  // Fetch vote data when the component loads
   useEffect(() => {
-    async function fetchVoteData() {
-      try {
-        const userVoteRef = doc(db, "votes", currentUser.email);
-        const voteDoc = await getDoc(userVoteRef);
-
-        if (voteDoc.exists()) {
-          const voteData = voteDoc.data();
-          setIsVoted(voteData.voted || false);
-          setCurrentVote(voteData.currentVote || 0);
-          console.log("Fetched vote data:", voteData);
-        } else {
-          console.log("No existing vote data for user:", currentUser.email);
+    async function fetchUserData() {
+      if (currentUser?.email) {
+        try {
+          const userRef = doc(db, "users", currentUser.email);
+          const userDoc = await getDoc(userRef);
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setUserRole(userData.role || "user");
+            console.log("User role fetched:", userData.role);
+          } else {
+            console.log("No user data found for:", currentUser.email);
+          }
+          const userVoteRef = doc(db, "votes", currentUser.email);
+          const voteDoc = await getDoc(userVoteRef);
+          if (voteDoc.exists()) {
+            const voteData = voteDoc.data();
+            setIsVoted(voteData.voted || false);
+            setCurrentVote(voteData.currentVote || 0);
+            console.log("Fetched vote data:", voteData);
+          } else {
+            console.log("No existing vote data for user:", currentUser.email);
+          }
+        } catch (error) {
+          console.error("Error fetching user or vote data:", error.message);
         }
-      } catch (error) {
-        console.error("Error fetching vote data:", error.message);
       }
     }
-    if (currentUser?.email) {
-      fetchVoteData();
-    }
+    fetchUserData();
   }, [currentUser]);
 
   async function handleVoteFinalClick() {
@@ -83,18 +89,38 @@ export default function VotingPage() {
       >
         LogOut
       </button>
-      <div className="VotingPage">
-        {[1, 2, 3, 4].map((index) => (
-          <CandidateCard
-            key={index}
-            index={index}
-            voted={voted}
-            handle={handleVoteFinalClick}
-            handleCurrent={handleCurrent}
-            currentVote={currentVote}
-          />
-        ))}
-      </div>
+
+      {userRole === "admin" && (
+        <div>
+          <div className="VotingPage">
+            {[1, 2, 3, 4].map((index) => (
+              <CandidateCard
+                key={index}
+                index={index}
+                voted={voted}
+                handle={handleVoteFinalClick}
+                handleCurrent={handleCurrent}
+                currentVote={currentVote}
+              />
+            ))}
+          </div>
+          <h3>Admin Dashboard</h3>
+        </div>
+      )}
+      {userRole !== "admin" && (
+        <div className="VotingPage">
+          {[1, 2, 3, 4].map((index) => (
+            <CandidateCard
+              key={index}
+              index={index}
+              voted={voted}
+              handle={handleVoteFinalClick}
+              handleCurrent={handleCurrent}
+              currentVote={currentVote}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }
