@@ -5,7 +5,7 @@ import { useAuth } from "../Context/AuthContext";
 import { doSignOut } from "../Context/AuthContext/auth";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore";
 
 export default function VotingPage() {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export default function VotingPage() {
   const [userRole, setUserRole] = useState("user");
   const [voted, setIsVoted] = useState(false);
   const [currentVote, setCurrentVote] = useState(0);
+  const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -23,7 +24,6 @@ export default function VotingPage() {
           if (userDoc.exists()) {
             const userData = userDoc.data();
             setUserRole(userData.role || "user");
-            console.log("User role fetched:", userData.role);
           } else {
             console.log("No user data found for:", currentUser.email);
           }
@@ -37,25 +37,29 @@ export default function VotingPage() {
           } else {
             console.log("No existing vote data for user:", currentUser.email);
           }
+          if (userRole === "admin") {
+            const usersRef = collection(db, "votes");
+            const usersSnapshot = await getDocs(usersRef);
+            const usersList = usersSnapshot.docs.map((doc) => doc.data());
+            setAllUsers(usersList);
+          }
         } catch (error) {
           console.error("Error fetching user or vote data:", error.message);
         }
       }
     }
     fetchUserData();
-  }, [currentUser]);
+  }, [currentUser, userRole]);
 
   async function handleVoteFinalClick() {
     try {
       setIsVoted(true);
       const userVoteRef = doc(db, "votes", currentUser.email);
-      console.log("Saving vote for:", currentUser.email, "Vote:", currentVote);
       await setDoc(userVoteRef, {
         voted: true,
         currentVote,
         timestamp: new Date(),
       });
-      console.log("Vote saved successfully!");
     } catch (error) {
       console.error("Error saving vote:", error.message);
     }
@@ -92,6 +96,20 @@ export default function VotingPage() {
 
       {userRole === "admin" && (
         <div>
+          <h1>Admin Dashboard</h1>
+          <h3>All Users:</h3>
+          <ul>
+            {allUsers.map((user, index) => (
+              <li key={index}>
+                {user.voted ? (
+                  <p>True - {user.email}</p>
+                ) : (
+                  <p>False - {user.email}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+
           <div className="VotingPage">
             {[1, 2, 3, 4].map((index) => (
               <CandidateCard
@@ -104,9 +122,9 @@ export default function VotingPage() {
               />
             ))}
           </div>
-          <h3>Admin Dashboard</h3>
         </div>
       )}
+
       {userRole !== "admin" && (
         <div className="VotingPage">
           {[1, 2, 3, 4].map((index) => (
