@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   max-width: 1280px;
   margin: 0;
@@ -112,6 +116,7 @@ button:hover {
     background-color: #30a6bb;
   }
 }
+
 .row {
   display: flex;
   flex-direction: row;
@@ -123,8 +128,8 @@ button:hover {
     rgba(128, 0, 128, 0.492),
     rgba(165, 42, 42, 0.678)
   );
-  width: 10%;
-  height: 50%;
+  width: 20%;
+  height: 90%;
   padding: 4%;
   border-radius: 2vh;
   box-shadow: 10px 10px #61dafbaa;
@@ -136,17 +141,52 @@ button:hover {
   .icon {
     font-size: 3rem;
   }
+  h1 {
+    border-bottom: none;
+  }
 }
 
 @media screen and (max-width: 600px) {
-  button {
-    width: 10vw;
+  .main {
+    flex-direction: column;
+    overflow: hidden;
+    background: linear-gradient(90deg, #61dafbaa, white, #61dafbaa);
+    height: 100vh;
   }
+
+  .explenation {
+    width: 90vw;
+    margin-bottom: 5%;
+    border-radius: 2vh;
+    box-shadow: 5px 5px #61dafbaa;
+    padding: 5%;
+  }
+
   .row {
     flex-direction: column;
-    overflow: scroll;
     align-items: center;
+    gap: 10px;
   }
+
+  form {
+    width: 90%;
+    padding: 2%;
+    .inputForom {
+      width: 60%;
+      gap: 2%;
+      input {
+        border-radius: 2vh;
+        padding: 2%;
+        width: 60%;
+        height: 80%;
+      }
+      label {
+        width: 50%;
+        text-align: center;
+      }
+    }
+  }
+
   .CandidateCard {
     width: 50%;
     height: 100%;
@@ -160,8 +200,14 @@ button:hover {
       box-shadow: none;
     }
   }
+  #Logout {
+    width: 40%;
+    padding: 2%;
+    margin: 2%;
+  }
+
   .VotingPage {
-    overflow: scroll;
+    overflow-y: auto;
     height: 100vh;
   }
 }

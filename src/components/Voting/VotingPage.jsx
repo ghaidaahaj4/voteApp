@@ -92,6 +92,7 @@ export default function VotingPage() {
   return (
     <div className="VotingPage">
       <button
+        id="Logout"
         onClick={() => {
           doSignOut();
           navigate("/");
@@ -100,7 +101,7 @@ export default function VotingPage() {
         LogOut
       </button>
       <h2>Hello,</h2>
-      <h1>{currentUser.email}</h1>
+      <h1 className="email">{currentUser.email}</h1>
 
       {userRole === "admin" && (
         <div>
