@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { doSignInWithEmailAndPassword } from "./Context/AuthContext/auth";
 import { useAuth } from "./Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import Popup from "reactjs-popup";
 export default function Login() {
   const navigate = useNavigate();
 
@@ -12,6 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isSignIn, setIsSignIn] = useState(false);
   const [message, setMessage] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,6 +29,7 @@ export default function Login() {
     } catch (error) {
       console.error("Login failed:", error);
       setMessage("Login failed. Please check your credentials.");
+      setIsPopupOpen(true);
     }
     console.log(message);
   };
@@ -57,7 +59,22 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-
+      <Popup
+        open={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        modal
+        nested
+      >
+        {(close) => (
+          <div className="popup-container">
+            <h2 className="popup-title">Error</h2>
+            <p className="popup-message">{message}</p>
+            <button className="popup-close" onClick={close}>
+              Close
+            </button>
+          </div>
+        )}
+      </Popup>
       <button type="submit">Sign in</button>
       <p>© Elections Day 2024</p>
     </form>
