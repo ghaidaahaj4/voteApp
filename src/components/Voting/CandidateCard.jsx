@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFish } from "@fortawesome/free-solid-svg-icons";
-
+import "../../App.css";
 export default function CandidateCard({
   index,
   voted,
@@ -18,8 +18,8 @@ export default function CandidateCard({
   }
 
   return (
-    <div>
-      <FontAwesomeIcon icon={faFish} />
+    <div className="CandidateCard">
+      <FontAwesomeIcon className="icon" icon={faFish} />
       <h1>NAME</h1>
       {index !== currentVote && !voted && (
         <button onClick={() => handleClick()}>Vote</button>
