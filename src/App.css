@@ -152,10 +152,11 @@ button:hover {
     overflow: hidden;
     background: linear-gradient(90deg, #61dafbaa, white, #61dafbaa);
     height: 100vh;
+    width: 100%;
   }
 
   .explenation {
-    width: 90vw;
+    width: 90% !important;
     margin-bottom: 5%;
     border-radius: 2vh;
     box-shadow: 5px 5px #61dafbaa;
