@@ -6,7 +6,10 @@ import { doSignOut } from "../Context/AuthContext/auth";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore";
-
+import { faFish } from "@fortawesome/free-solid-svg-icons";
+import { faCat } from "@fortawesome/free-solid-svg-icons";
+import { faDog } from "@fortawesome/free-solid-svg-icons";
+import { faCow } from "@fortawesome/free-solid-svg-icons";
 export default function VotingPage() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
@@ -14,7 +17,12 @@ export default function VotingPage() {
   const [voted, setIsVoted] = useState(false);
   const [currentVote, setCurrentVote] = useState(0);
   const [allUsers, setAllUsers] = useState([]);
-
+  const parities = {
+    1: [faFish, "Fish Party"],
+    2: [faCat, "Cat Party"],
+    3: [faDog, "Dog Party"],
+    4: [faCow, "Cow Party"],
+  };
   useEffect(() => {
     async function fetchUserData() {
       if (currentUser?.email) {
@@ -84,6 +92,7 @@ export default function VotingPage() {
   return (
     <div className="VotingPage">
       <button
+        id="Logout"
         onClick={() => {
           doSignOut();
           navigate("/");
@@ -92,7 +101,7 @@ export default function VotingPage() {
         LogOut
       </button>
       <h2>Hello,</h2>
-      <h1>{currentUser.email}</h1>
+      <h1 className="email">{currentUser.email}</h1>
 
       {userRole === "admin" && (
         <div>
@@ -111,14 +120,16 @@ export default function VotingPage() {
           </ul>
 
           <div className="row">
-            {[1, 2, 3, 4].map((index) => (
+            {Object.entries(parities).map(([index, [icon, name]]) => (
               <CandidateCard
                 key={index}
-                index={index}
+                index={parseInt(index)}
                 voted={voted}
                 handle={handleVoteFinalClick}
                 handleCurrent={handleCurrent}
                 currentVote={currentVote}
+                icon={icon}
+                name={name}
               />
             ))}
           </div>
@@ -127,14 +138,16 @@ export default function VotingPage() {
 
       {userRole !== "admin" && (
         <div className="row">
-          {[1, 2, 3, 4].map((index) => (
+          {Object.entries(parities).map(([index, [icon, name]]) => (
             <CandidateCard
               key={index}
-              index={index}
+              index={parseInt(index)}
               voted={voted}
               handle={handleVoteFinalClick}
               handleCurrent={handleCurrent}
               currentVote={currentVote}
+              icon={icon}
+              name={name}
             />
           ))}
         </div>
