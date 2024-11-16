@@ -12,7 +12,7 @@ This project is a voting application built using React and Firebase. It allows u
 
 - **Voting Page**:  
   - Displays the logged-in user’s name.  
-  - Allows users to vote for one of four parties: Cats, Dogs, Cows, or Lions.  
+  - Allows users to vote for one of four parties: Cats, Dogs, Cows, or Fishs.  
   - Restricts users to one vote, with the option to change their vote.  
 
 - **Admin Page**:  
