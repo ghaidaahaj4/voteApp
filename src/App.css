@@ -93,6 +93,14 @@ form {
   }
 }
 .VotingPage {
+  background: linear-gradient(90deg, #61dafbaa, white);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.row {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 }
