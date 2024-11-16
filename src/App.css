@@ -139,8 +139,29 @@ button:hover {
 }
 
 @media screen and (max-width: 600px) {
+  button {
+    width: 10vw;
+  }
   .row {
     flex-direction: column;
     overflow: scroll;
+    align-items: center;
+  }
+  .CandidateCard {
+    width: 50%;
+    height: 100%;
+    padding: 4%;
+    margin: 2%;
+    border-radius: 2vh;
+    box-shadow: 10px 10px #61dafbaa;
+    button {
+      width: 80%;
+      height: 20%;
+      box-shadow: none;
+    }
+  }
+  .VotingPage {
+    overflow: scroll;
+    height: 100vh;
   }
 }
