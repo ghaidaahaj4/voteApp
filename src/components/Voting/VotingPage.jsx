@@ -82,9 +82,7 @@ export default function VotingPage() {
   }
 
   return (
-    <>
-      <h2>Hello,</h2>
-      <h1>{currentUser.email}</h1>
+    <div className="VotingPage">
       <button
         onClick={() => {
           doSignOut();
@@ -93,6 +91,8 @@ export default function VotingPage() {
       >
         LogOut
       </button>
+      <h2>Hello,</h2>
+      <h1>{currentUser.email}</h1>
 
       {userRole === "admin" && (
         <div>
@@ -110,7 +110,7 @@ export default function VotingPage() {
             ))}
           </ul>
 
-          <div className="VotingPage">
+          <div className="row">
             {[1, 2, 3, 4].map((index) => (
               <CandidateCard
                 key={index}
@@ -126,7 +126,7 @@ export default function VotingPage() {
       )}
 
       {userRole !== "admin" && (
-        <div className="VotingPage">
+        <div className="row">
           {[1, 2, 3, 4].map((index) => (
             <CandidateCard
               key={index}
@@ -139,6 +139,6 @@ export default function VotingPage() {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }
