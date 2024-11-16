@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFish } from "@fortawesome/free-solid-svg-icons";
 import "../../App.css";
+
 export default function CandidateCard({
   index,
   voted,
   handle,
   handleCurrent,
   currentVote,
+  icon,
+  name,
 }) {
   function handleClick(final) {
     if (final === "FINAL") {
@@ -19,8 +21,8 @@ export default function CandidateCard({
 
   return (
     <div className="CandidateCard">
-      <FontAwesomeIcon className="icon" icon={faFish} />
-      <h1>NAME</h1>
+      <FontAwesomeIcon className="icon" icon={icon} />
+      <h1>{name}</h1>
       {index !== currentVote && !voted && (
         <button onClick={() => handleClick()}>Vote</button>
       )}
