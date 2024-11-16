@@ -7,7 +7,6 @@ import Popup from "reactjs-popup";
 export default function Login() {
   const navigate = useNavigate();
 
-  const userLogin = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignIn, setIsSignIn] = useState(false);
@@ -30,8 +29,12 @@ export default function Login() {
       console.error("Login failed:", error);
       setMessage("Login failed. Please check your credentials.");
       setIsPopupOpen(true);
+      console.log(isPopupOpen);
     }
     console.log(message);
+    if (message === "Login failed. Please check your credentials.") {
+      setIsPopupOpen(true);
+    }
   };
 
   return (
@@ -61,7 +64,9 @@ export default function Login() {
       </div>
       <Popup
         open={isPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
+        onClose={() => {
+          setIsPopupOpen(false);
+        }}
         modal
         nested
       >
