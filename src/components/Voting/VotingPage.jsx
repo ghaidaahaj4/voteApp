@@ -58,7 +58,7 @@ export default function VotingPage() {
     }
 
     fetchUserData();
-  }, [currentUser, userRole]);
+  }, [currentUser, userRole, currentVote]);
 
   async function handleVoteFinalClick() {
     try {

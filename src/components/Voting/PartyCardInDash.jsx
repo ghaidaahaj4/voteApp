@@ -10,15 +10,14 @@ export default function PartyCardInDash({ votes }) {
     4: [faCow, "Cow Party"],
   };
   return (
-    <div>
-      <ul>
-        {votes.map((vote, index) => (
-          <li className="results" key={index}>
-            <FontAwesomeIcon className="icon" icon={parities[index + 1][0]} />
-            {parities[index + 1][1]}-{vote}
-          </li>
-        ))}
-      </ul>
+    <div className="PartyResults">
+      {votes.map((vote, index) => (
+        <div className="results" key={index}>
+          <FontAwesomeIcon className="icon" icon={parities[index + 1][0]} />
+          <h1>{parities[index + 1][1]} </h1>
+          <h2> {vote} votes </h2>
+        </div>
+      ))}
     </div>
   );
 }

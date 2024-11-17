@@ -33,8 +33,8 @@ export default function AdminDashBoard({ allUsers }) {
           </li>
         ))}
       </ul>
-
-      <h3>All Parties</h3>
+      <h1>RESULTS</h1>
+      <h3>All Parties </h3>
       <PartyCardInDash votes={votes} />
     </div>
   );
