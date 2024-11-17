@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import { useState, useEffect } from "react";
 
 export default function AdminDashBoard({ allUsers }) {
-  for (let i = 0; i < allUsers.length; i++) {
-    if (allUsers[i].voted) {
-      console.log(allUsers[i].currentVote);
-    }
-  }
+  const [votes, setVotes] = useState([]);
+  useEffect(() => {
+    const votedUsers = allUsers
+      .filter((user) => user.voted)
+      .map((user) => user.currentVote);
+
+    setVotes(votedUsers);
+  }, [allUsers]);
+
   return (
     <div>
       <h1>Admin Dashboard</h1>
@@ -23,6 +27,11 @@ export default function AdminDashBoard({ allUsers }) {
         ))}
       </ul>
       <h3>All Parties</h3>
+      <ul>
+        {votes.map((vote, index) => (
+          <li key={index}>{vote}</li>
+        ))}
+      </ul>
     </div>
   );
 }

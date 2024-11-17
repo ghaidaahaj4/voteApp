@@ -8,8 +8,9 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: scroll;
   text-align: center;
+  background: linear-gradient(90deg, #61dafbaa, white, #61dafbaa);
 }
 
 .mainImg {
@@ -81,7 +82,7 @@ button:hover {
   .explenation {
     width: 55%;
     height: 100%;
-    background: linear-gradient(90deg, #61dafbaa, white);
+    /* background: linear-gradient(90deg, #61dafbaa, white); */
     padding: 10vh 0;
     display: flex;
     flex-direction: column;
@@ -100,7 +101,7 @@ button:hover {
   }
 }
 .VotingPage {
-  background: linear-gradient(90deg, #61dafbaa, white);
+  /* background: linear-gradient(90deg, #61dafbaa, white); */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -146,20 +147,19 @@ button:hover {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1300px) {
   .main {
     flex-direction: column;
-    overflow: hidden;
-    background: linear-gradient(90deg, #61dafbaa, white, #61dafbaa);
+    overflow: scroll;
     height: 100vh;
     width: 100%;
+    padding: 10%;
   }
 
   .explenation {
-    width: 90% !important;
+    width: 80% !important;
     margin-bottom: 5%;
     border-radius: 2vh;
-    box-shadow: 5px 5px #61dafbaa;
     padding: 5%;
   }
 
