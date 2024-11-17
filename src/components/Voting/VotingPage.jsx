@@ -65,6 +65,7 @@ export default function VotingPage() {
       setIsVoted(true);
       const userVoteRef = doc(db, "votes", currentUser.email);
       await setDoc(userVoteRef, {
+        email: currentUser.email,
         voted: true,
         currentVote,
         timestamp: new Date(),
@@ -79,6 +80,7 @@ export default function VotingPage() {
       setCurrentVote(index);
       const userVoteRef = doc(db, "votes", currentUser.email);
       await setDoc(userVoteRef, {
+        email: currentUser.email,
         voted,
         currentVote: index,
         timestamp: new Date(),
