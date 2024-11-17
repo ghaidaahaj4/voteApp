@@ -8,8 +8,9 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: scroll;
   text-align: center;
+  background: linear-gradient(90deg, #61dafbaa, white, #61dafbaa);
 }
 
 .mainImg {
@@ -81,7 +82,7 @@ button:hover {
   .explenation {
     width: 55%;
     height: 100%;
-    background: linear-gradient(90deg, #61dafbaa, white);
+    /* background: linear-gradient(90deg, #61dafbaa, white); */
     padding: 10vh 0;
     display: flex;
     flex-direction: column;
@@ -100,7 +101,7 @@ button:hover {
   }
 }
 .VotingPage {
-  background: linear-gradient(90deg, #61dafbaa, white);
+  /* background: linear-gradient(90deg, #61dafbaa, white); */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -145,73 +146,6 @@ button:hover {
     border-bottom: none;
   }
 }
-
-@media screen and (max-width: 600px) {
-  .main {
-    flex-direction: column;
-    overflow: hidden;
-    background: linear-gradient(90deg, #61dafbaa, white, #61dafbaa);
-    height: 100vh;
-    width: 100%;
-  }
-
-  .explenation {
-    width: 90% !important;
-    margin-bottom: 5%;
-    border-radius: 2vh;
-    box-shadow: 5px 5px #61dafbaa;
-    padding: 5%;
-  }
-
-  .row {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  form {
-    width: 90%;
-    padding: 2%;
-    .inputForom {
-      width: 60%;
-      gap: 2%;
-      input {
-        border-radius: 2vh;
-        padding: 2%;
-        width: 60%;
-        height: 80%;
-      }
-      label {
-        width: 50%;
-        text-align: center;
-      }
-    }
-  }
-
-  .CandidateCard {
-    width: 50%;
-    height: 100%;
-    padding: 4%;
-    margin: 2%;
-    border-radius: 2vh;
-    box-shadow: 10px 10px #61dafbaa;
-    button {
-      width: 80%;
-      height: 20%;
-      box-shadow: none;
-    }
-  }
-  #Logout {
-    width: 40%;
-    padding: 2%;
-    margin: 2%;
-  }
-
-  .VotingPage {
-    overflow-y: auto;
-    height: 100vh;
-  }
-}
 .popup-container {
   background: white;
   padding: 20px;
@@ -239,4 +173,108 @@ button:hover {
   padding: 10px 15px;
   font-size: 14px;
   cursor: pointer;
+}
+.LoadingPage {
+  background: linear-gradient(90deg, #61dafbaa, white);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.voted {
+  color: green;
+  font-weight: bold;
+}
+
+.not-voted {
+  color: red;
+  font-style: italic;
+}
+.usersInDash {
+  background-color: #30a6bb1a;
+  width: 60%;
+  height: 50%;
+  overflow-y: scroll;
+  border-radius: 2vh;
+  box-shadow: 10px 10px #61dafbaa;
+  li {
+    list-style: none;
+  }
+}
+.dash {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+@media screen and (max-width: 1300px) {
+  .main {
+    flex-direction: column;
+    overflow: scroll;
+    height: 100vh;
+    width: 100%;
+    padding: 10%;
+  }
+
+  .explenation {
+    margin-bottom: 5%;
+    border-radius: 2vh;
+    padding: 5%;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  form {
+    width: 90%;
+    padding: 2%;
+    .inputForom {
+      width: 60%;
+      gap: 2%;
+      input {
+        border-radius: 2vh;
+        padding: 2%;
+        width: 70%;
+        height: 90%;
+      }
+      label {
+        width: 30%;
+        text-align: center;
+      }
+    }
+    button {
+      height: 10%;
+    }
+  }
+
+  .CandidateCard {
+    width: 50%;
+    height: 100%;
+    padding: 4%;
+    margin: 2%;
+    border-radius: 2vh;
+    box-shadow: 10px 10px #61dafbaa;
+    button {
+      width: 80%;
+      height: 20%;
+      box-shadow: none;
+    }
+  }
+  #Logout {
+    width: 40%;
+    padding: 2%;
+    margin: 2%;
+  }
+
+  .VotingPage {
+    overflow-y: auto;
+    height: 100vh;
+  }
 }

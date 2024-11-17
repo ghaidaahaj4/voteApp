@@ -1,15 +1,13 @@
-/* eslint-disable no-undef */
-import CandidateCard from "./CandidateCard";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { doSignOut } from "../Context/AuthContext/auth";
-import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore";
-import { faFish } from "@fortawesome/free-solid-svg-icons";
-import { faCat } from "@fortawesome/free-solid-svg-icons";
-import { faDog } from "@fortawesome/free-solid-svg-icons";
-import { faCow } from "@fortawesome/free-solid-svg-icons";
+import CandidateCard from "./CandidateCard";
+import { faFish, faCat, faDog, faCow } from "@fortawesome/free-solid-svg-icons";
+import Loading from "./Loading";
+import AdminDashBoard from "./AdminDashBoard";
 export default function VotingPage() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
@@ -17,34 +15,34 @@ export default function VotingPage() {
   const [voted, setIsVoted] = useState(false);
   const [currentVote, setCurrentVote] = useState(0);
   const [allUsers, setAllUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // New state for loading
   const parities = {
     1: [faFish, "Fish Party"],
     2: [faCat, "Cat Party"],
     3: [faDog, "Dog Party"],
     4: [faCow, "Cow Party"],
   };
+
   useEffect(() => {
     async function fetchUserData() {
       if (currentUser?.email) {
         try {
+          // Fetch user data
           const userRef = doc(db, "users", currentUser.email);
           const userDoc = await getDoc(userRef);
           if (userDoc.exists()) {
             const userData = userDoc.data();
             setUserRole(userData.role || "user");
-          } else {
-            console.log("No user data found for:", currentUser.email);
           }
+          // Fetch vote data
           const userVoteRef = doc(db, "votes", currentUser.email);
           const voteDoc = await getDoc(userVoteRef);
           if (voteDoc.exists()) {
             const voteData = voteDoc.data();
             setIsVoted(voteData.voted || false);
             setCurrentVote(voteData.currentVote || 0);
-            console.log("Fetched vote data:", voteData);
-          } else {
-            console.log("No existing vote data for user:", currentUser.email);
           }
+          // Fetch all users if admin
           if (userRole === "admin") {
             const usersRef = collection(db, "votes");
             const usersSnapshot = await getDocs(usersRef);
@@ -53,9 +51,12 @@ export default function VotingPage() {
           }
         } catch (error) {
           console.error("Error fetching user or vote data:", error.message);
+        } finally {
+          setIsLoading(false); // Data fetching completed
         }
       }
     }
+
     fetchUserData();
   }, [currentUser, userRole]);
 
@@ -77,16 +78,18 @@ export default function VotingPage() {
     try {
       setCurrentVote(index);
       const userVoteRef = doc(db, "votes", currentUser.email);
-      console.log("Saving vote for:", currentUser.email, "Vote:", currentVote);
       await setDoc(userVoteRef, {
         voted,
         currentVote: index,
         timestamp: new Date(),
       });
-      console.log("Vote saved successfully!");
     } catch (error) {
       console.error("Error saving vote:", error.message);
     }
+  }
+
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
@@ -105,20 +108,6 @@ export default function VotingPage() {
 
       {userRole === "admin" && (
         <div>
-          <h1>Admin Dashboard</h1>
-          <h3>All Users:</h3>
-          <ul>
-            {allUsers.map((user, index) => (
-              <li key={index}>
-                {user.voted ? (
-                  <p>True - {user.email}</p>
-                ) : (
-                  <p>False - {user.email}</p>
-                )}
-              </li>
-            ))}
-          </ul>
-
           <div className="row">
             {Object.entries(parities).map(([index, [icon, name]]) => (
               <CandidateCard
@@ -133,6 +122,7 @@ export default function VotingPage() {
               />
             ))}
           </div>
+          <AdminDashBoard allUsers={allUsers} />
         </div>
       )}
 
