@@ -157,7 +157,6 @@ button:hover {
   }
 
   .explenation {
-    width: 80% !important;
     margin-bottom: 5%;
     border-radius: 2vh;
     padding: 5%;
@@ -178,13 +177,16 @@ button:hover {
       input {
         border-radius: 2vh;
         padding: 2%;
-        width: 60%;
-        height: 80%;
+        width: 70%;
+        height: 90%;
       }
       label {
-        width: 50%;
+        width: 30%;
         text-align: center;
       }
+    }
+    button {
+      height: 10%;
     }
   }
 
