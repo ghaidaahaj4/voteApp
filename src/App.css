@@ -181,6 +181,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
 
 .voted {
@@ -210,6 +212,9 @@ button:hover {
   align-items: center;
   height: 60%;
   width: 100%;
+}
+.results {
+  list-style: none;
 }
 @media screen and (max-width: 1300px) {
   .main {
