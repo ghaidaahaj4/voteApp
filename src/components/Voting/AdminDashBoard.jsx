@@ -12,20 +12,21 @@ export default function AdminDashBoard({ allUsers }) {
   }, [allUsers]);
 
   return (
-    <div>
+    <div className="dash">
       <h1>Admin Dashboard</h1>
       <h3>All Users:</h3>
-      <ul>
+      <ul className="usersInDash">
         {allUsers.map((user, index) => (
           <li key={index}>
-            {user.voted ? (
-              <p>True - {user.email}</p>
-            ) : (
-              <p>False - {user.email}</p>
-            )}
+            <p className={user.voted ? "voted" : "not-voted"}>
+              {user.voted
+                ? `${user.email} - Voted `
+                : `${user.email} - NotVoted`}
+            </p>
           </li>
         ))}
       </ul>
+
       <h3>All Parties</h3>
       <ul>
         {votes.map((vote, index) => (
