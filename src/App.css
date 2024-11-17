@@ -3,6 +3,7 @@
 }
 
 html {
+  font-family: "Russo One", sans-serif;
   max-width: 1280px;
   margin: 0;
   padding: 0;
@@ -181,6 +182,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
 
 .voted {
@@ -208,8 +211,36 @@ button:hover {
   flex-direction: column;
   margin-top: 5%;
   align-items: center;
-  height: 100%;
+  height: 60%;
   width: 100%;
+}
+.PartyResults {
+  width: 80%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.results {
+  width: 20%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2vh;
+  box-shadow: 10px 10px #61dafbaa;
+  padding: 2%;
+  background: linear-gradient(
+    pink,
+    rgba(128, 0, 128, 0.492),
+    rgba(165, 42, 42, 0.678)
+  );
+  .icon {
+    color: #30a6bb;
+    font-size: 5rem;
+  }
+  h2 {
+    color: #94bb30;
+  }
 }
 @media screen and (max-width: 1300px) {
   .main {

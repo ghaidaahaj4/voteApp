@@ -1,14 +1,21 @@
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-
+import PartyCardInDash from "./PartyCardInDash";
 export default function AdminDashBoard({ allUsers }) {
   const [votes, setVotes] = useState([]);
-  useEffect(() => {
-    const votedUsers = allUsers
-      .filter((user) => user.voted)
-      .map((user) => user.currentVote);
 
-    setVotes(votedUsers);
+  useEffect(() => {
+    const voteCounts = [0, 0, 0, 0];
+    allUsers.forEach((user) => {
+      if (user.voted) {
+        console.log(user.currentVote);
+        voteCounts[user.currentVote - 1] += 1;
+        console.log(voteCounts);
+      }
+    });
+
+    setVotes(voteCounts);
   }, [allUsers]);
 
   return (
@@ -26,13 +33,9 @@ export default function AdminDashBoard({ allUsers }) {
           </li>
         ))}
       </ul>
-
-      <h3>All Parties</h3>
-      <ul>
-        {votes.map((vote, index) => (
-          <li key={index}>{vote}</li>
-        ))}
-      </ul>
+      <h1>RESULTS</h1>
+      <h3>All Parties </h3>
+      <PartyCardInDash votes={votes} />
     </div>
   );
 }
